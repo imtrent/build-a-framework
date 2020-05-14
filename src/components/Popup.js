@@ -48,7 +48,7 @@ const Popup = forwardRef(({ handleConfirm }, ref) => {
 		<div
 			className={`${
 				isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
-			} absolute z-50 bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center transition duration-200 ease-in-out`}
+			} fixed z-50 bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center transition duration-200 ease-in-out`}
 		>
 			<div className="fixed inset-0 transition-opacity">
 				<div className="absolute inset-0 bg-gray-500 opacity-75"></div>

@@ -1,32 +1,29 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import randomColor from './../utils/randomColor';
+import React, { useState, useMemo, useCallback, useContext } from 'react';
+import { Context } from './../store';
+import { shadePalette } from './../utils/shadeColor';
 
-const Color = ({ uuid, deleteColor }) => {
-	const [name, setName] = useState('');
-	const [colors, setColors] = useState({
-		one: '804020',
-		two: '141041',
-		three: '574200',
-		four: 'f84afi3',
-		five: 'abpde92',
-		six: 'jug857',
-		seven: 'ak4i49',
-		eight: '084jdk',
-		nine: 'abc84k'
-	});
+const Color = ({ data, deleteColor }) => {
+	const [state, dispatch] = useContext(Context);
 
 	const handleChange = (evt) => {
 		let text = evt.target.value.toLowerCase();
 		text = text.replace(/ /g, '-');
-		setName(text);
+		// setName(text);
+		// dispatch({ type: 'UPDATE_COLOR':  });
 	};
+
+	const computeColors = useCallback((hex) => {
+		return shadePalette(hex);
+	}, []);
+
+	const shades = useMemo(() => computeColors(data.hex), [computeColors, data.hex]);
 
 	return (
 		<div>
-			<input className="w-full bg-gray-100 focus:outline-none" onChange={handleChange} value={name} />
-			<div className="relative rounded-lg border border-gray-500">
+			<input className="w-full focus:outline-none" onChange={handleChange} value={data.paletteName} />
+			<div className="relative rounded-lg shadow-md border border-gray-300">
 				<div
-					onClick={() => deleteColor(uuid)}
+					onClick={() => deleteColor(data.id)}
 					className="absolute p-1 rounded-br-md rounded-tl-sm cursor-pointer right-0 bottom-0 bg-red-500 hover:bg-red-600 transition ease-in duration-300"
 				>
 					<svg
@@ -42,33 +39,18 @@ const Color = ({ uuid, deleteColor }) => {
 						<path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
 					</svg>
 				</div>
-				<div className="h-10 bg-gray-900 flex items-center justify-center rounded-t-lg">
-					<p>{colors.one}</p>
-				</div>
-				<div className="h-10 bg-gray-800 flex items-center justify-center">
-					<p>{colors.two}</p>
-				</div>
-				<div className="h-10 bg-gray-700 flex items-center justify-center">
-					<p>{colors.three}</p>
-				</div>
-				<div className="h-10 bg-gray-600 flex items-center justify-center">
-					<p>{colors.four}</p>
-				</div>
-				<div className="h-10 bg-gray-500 flex items-center justify-center">
-					<p>{colors.five}</p>
-				</div>
-				<div className="h-10 bg-gray-400 flex items-center justify-center">
-					<p>{colors.six}</p>
-				</div>
-				<div className="h-10 bg-gray-300 flex items-center justify-center">
-					<p>{colors.seven}</p>
-				</div>
-				<div className="h-10 bg-gray-200 flex items-center justify-center">
-					<p>{colors.eight}</p>
-				</div>
-				<div className="h-10 bg-gray-100 flex items-center justify-center rounded-b-lg">
-					<p>{colors.nine}</p>
-				</div>
+				{shades &&
+					shades.map((shade, index) => (
+						<div
+							key={index}
+							className={`h-10 flex items-center justify-center ${index === 0 ? 'rounded-t-lg' : ''} ${
+								index === shades.length - 1 ? 'rounded-b-lg' : ''
+							}`}
+							style={{ backgroundColor: '#' + shade }}
+						>
+							<p>#{shade}</p>
+						</div>
+					))}
 			</div>
 		</div>
 	);
