@@ -8,8 +8,7 @@ const Color = ({ data, deleteColor }) => {
 	const handleChange = (evt) => {
 		let text = evt.target.value.toLowerCase();
 		text = text.replace(/ /g, '-');
-		// setName(text);
-		// dispatch({ type: 'UPDATE_COLOR':  });
+		dispatch({ type: 'EDIT_COLOR', payload: {...data, paletteName: text} });
 	};
 
 	const computeColors = useCallback((hex) => {

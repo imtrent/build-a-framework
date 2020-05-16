@@ -13,10 +13,8 @@ const reducer = (state, action) => {
 				...state,
 				colors: [
 					...state.colors.map((color) => {
-						if (color.id === action.payload.id) {
-							delete action.payload.id;
-							return { ...color };
-						}
+						if (color.id === action.payload.id) return { ...color, ...action.payload };
+						else return color;
 					})
 				]
 			};
