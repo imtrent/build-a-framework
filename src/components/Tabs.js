@@ -9,10 +9,8 @@ const Tabs = ({ items, selected, handleChange }) => {
 						key={index}
 						onClick={() => handleChange(item)}
 						className={`${
-							selected === item
-								? 'text-gray-800 bg-gray-400'
-								: 'text-gray-600 hover:text-gray-800 focus:text-gray-800'
-						} ml-4 px-3 py-2 bg-gray-300 font-medium text-sm leading-5 rounded-md focus:outline-none`}
+							selected === item ? 'bg-gray-800 text-white' : ' text-gray-800'
+						} ml-4 px-3 py-2 bg-gray-200 font-medium text-sm leading-5 rounded-md focus:outline-none`}
 					>
 						{item}
 					</button>

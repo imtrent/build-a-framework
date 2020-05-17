@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useContext } from 'react';
+import React, { useMemo, useCallback, useContext } from 'react';
 import { Context } from './../store';
 import { shadePalette } from './../utils/shadeColor';
 
@@ -8,7 +8,7 @@ const Color = ({ data, deleteColor }) => {
 	const handleChange = (evt) => {
 		let text = evt.target.value.toLowerCase();
 		text = text.replace(/ /g, '-');
-		dispatch({ type: 'EDIT_COLOR', payload: {...data, paletteName: text} });
+		dispatch({ type: 'EDIT_COLOR', payload: { ...data, paletteName: text } });
 	};
 
 	const computeColors = useCallback((hex) => {
@@ -19,7 +19,7 @@ const Color = ({ data, deleteColor }) => {
 
 	return (
 		<div>
-			<input className="w-full focus:outline-none" onChange={handleChange} value={data.paletteName} />
+			<input className="w-full focus:outline-none font-bold" onChange={handleChange} value={data.paletteName} />
 			<div className="relative rounded-lg shadow-md border border-gray-300">
 				<div
 					onClick={() => deleteColor(data.id)}
