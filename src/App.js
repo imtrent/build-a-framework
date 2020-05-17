@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from './components/Layout';
 import Tabs from './components/Tabs';
 import Colors from './components/Colors';
+import Sizing from './components/Sizing';
 
 function App() {
 	const [selectedTab, setSelectedTab] = useState('Colors');
@@ -9,12 +10,13 @@ function App() {
 		<Layout>
 			<div className="flex justify-between">
 				<Tabs
-					items={['Colors', 'Tab 2', 'Tab 3', 'Tab 4']}
+					items={['Colors', 'Sizing', 'Layout', 'Tab 4']}
 					selected={selectedTab}
 					handleChange={(tabname) => setSelectedTab(tabname)}
 				/>
 			</div>
-			<div>{selectedTab === 'Colors' && <Colors />}</div>
+			<React.Fragment>{selectedTab === 'Colors' && <Colors />}</React.Fragment>
+			<React.Fragment>{selectedTab === 'Sizing' && <Sizing />}</React.Fragment>
 		</Layout>
 	);
 }

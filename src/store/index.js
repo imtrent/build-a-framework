@@ -5,9 +5,9 @@ import randomColor from './../utils/randomColor';
 
 const initialState = {
 	colors: [
-		{ id: uuid(), hex: 'FF6D69', paletteName: 'brand-new-color' },
-		{ id: uuid(), hex: '8D9196', paletteName: 'brand-new-color' },
-		{ id: uuid(), hex: '737373', paletteName: 'brand-new-color' }
+		{ id: uuid(), hex: '876ECC', paletteName: 'palette-name' },
+		{ id: uuid(), hex: '8D9196', paletteName: 'palette-name' },
+		{ id: uuid(), hex: '737373', paletteName: 'palette-name' }
 	]
 };
 
